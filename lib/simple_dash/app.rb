@@ -17,15 +17,9 @@ module SimpleDash
 
     def call(env)
       req = Rack::Request.new(env)
-
-      case req.path
-      when "/"
-        config = SimpleDash.configuration
-        body = ERB.new(File.read("app/views/simple_dash/index.html.erb")).result(binding)
-        [200, {"Content-Type" => "text/html"}, [body]]
-      else
-        [404, {"Content-Type" => "text/html"}, ["Not Found"]]
-      end
+      config = SimpleDash.configuration
+      body = ERB.new(File.read("app/views/simple_dash/index.html.erb")).result(binding)
+      [200, {"content-type" => "text/html"}, [body]]
     end
   end
 end
