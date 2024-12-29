@@ -2,6 +2,26 @@
 
 require "spec_helper"
 
+class TestI18n
+  def self.t(key)
+    key.to_s.upcase
+  end
+end
+
+class DatabaseConnection
+  def self.active?
+    true
+  end
+end
+
+class KeyValueStore
+  class PingError < StandardError; end
+
+  def ping
+    "PONG"
+  end
+end
+
 RSpec.describe SimpleDash do
   let(:app) do
     SimpleDash.configure do |config|
@@ -17,27 +37,6 @@ RSpec.describe SimpleDash do
   end
 
   let(:env) { Rack::MockRequest.env_for("/") }
-
-  before do
-    class TestI18n
-      def self.t(key)
-        key.to_s.upcase
-      end
-    end
-
-    class DatabaseConnection
-      def self.active?
-        true
-      end
-    end
-
-    class KeyValueStore
-      class PingError < StandardError; end
-      def ping
-        "PONG"
-      end
-    end
-  end
 
   describe "GET /" do
     it "returns a 200 status code" do
@@ -92,10 +91,10 @@ RSpec.describe SimpleDash do
 
     it "returns a 404 status code" do
       status, headers, body = app.call(env)
-      
+
       expect(status).to eq(404)
       expect(headers["Content-Type"]).to eq("text/html")
       expect(body).to eq(["Not Found"])
     end
   end
-end 
+end
