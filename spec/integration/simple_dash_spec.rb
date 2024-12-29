@@ -73,7 +73,9 @@ RSpec.describe SimpleDash do
           _status, _headers, body = app.call(env)
           html = body.first.gsub(/<\/?[^>]*>/, "")
           expect(html).to include("✅ DATABASE")
+          expect(html).to include("✅ DATABASE.ACTIVE")
           expect(html).to include("❌ KEYVALUESTORE")
+          expect(html).to include("❌ KEYVALUESTORE.ACTIVE")
         end
       end
     end
@@ -83,7 +85,9 @@ RSpec.describe SimpleDash do
         _status, _headers, body = app.call(env)
         html = body.first.gsub(/<\/?[^>]*>/, "")
         expect(html).to include("✅ database")
+        expect(html).to include("✅ database.active")
         expect(html).to include("✅ keyvaluestore")
+        expect(html).to include("✅ keyvaluestore.active")
       end
     end
   end

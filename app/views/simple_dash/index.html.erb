@@ -72,7 +72,7 @@
   <body>
     <h1><%= config.i18n.t(dashboard.name) %></h1>
     <ul class="health-checks">
-      <% dashboard.for(dashboard.name).checks.each do |check| %>
+      <% runner.checks.each do |check| %>
         <li>
           <span class="status-<%= check.success? ? "success" : "fail" %>"><%= check.success? ? "✅" : "❌" %></span> <%= config.i18n.t(check.name) %>
           <ul>

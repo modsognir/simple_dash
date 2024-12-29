@@ -19,6 +19,7 @@ module SimpleDash
       req = Rack::Request.new(env)
       if dashboard
         config = SimpleDash.configuration
+        runner = dashboard.for(dashboard.name).run
         body = ERB.new(File.read("app/views/simple_dash/index.html.erb")).result(binding)
         [200, {"content-type" => "text/html"}, [body]]
       else
