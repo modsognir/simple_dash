@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= config.i18n.t(dashboard.name) %></title>
+    <style>
+      :root {
+          --bg-color: #ffffff;
+          --text-color: #2d3748;
+          --border-color: #e2e8f0;
+          --status-success: #2f855a;
+          --status-fail: #c53030;
+      }
+      
+      @media (prefers-color-scheme: dark) {
+          :root {
+              --bg-color: #1a202c;
+              --text-color: #e2e8f0;
+              --border-color: #4a5568;
+              --status-success: #68d391;
+              --status-fail: #fc8181;
+          }
+      }
+      
+      body {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          max-width: 800px;
+          margin: 2rem auto;
+          padding: 0 1rem;
+          line-height: 1.5;
+          background-color: var(--bg-color);
+          color: var(--text-color);
+      }
+      
+      h1 {
+          color: var(--text-color);
+          padding-bottom: 0.5rem;
+      }
+      
+      .health-checks {
+          list-style: none;
+          padding-left: 0;
+      }
+      
+      .health-checks > li {
+          margin: 1rem 0;
+          font-size: 1.1rem;
+          font-weight: 500;
+      }
+      
+      .health-checks > li ul li {
+          font-size: 1rem;
+          font-weight: normal;
+      }
+      
+      .health-checks ul {
+          list-style: none;
+          padding-left: 2rem;
+          margin: 0.5rem 0;
+      }
+      
+      .status-success {
+          color: var(--status-success);
+      }
+      
+      .status-fail {
+          color: var(--status-fail);
+      }
+    </style>
+  </head>
+  <body>
+    <h1><%= config.i18n.t(dashboard.name) %></h1>
+    <ul class="health-checks">
+      <% dashboard.for(dashboard.name).checks.each do |check| %>
+        <li>
+          <span class="status-<%= check.success? ? "success" : "fail" %>"><%= check.success? ? "✅" : "❌" %></span> <%= config.i18n.t(check.name) %>
+          <ul>
+            <% check.conditions.each do |condition| %>
+              <li><span class="status-<%= condition.success? ? "success" : "fail" %>"><%= condition.success? ? "✅" : "❌" %></span> <%= config.i18n.t(condition.name) %></li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </body>
+</html>
