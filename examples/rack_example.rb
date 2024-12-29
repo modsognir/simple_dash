@@ -1,5 +1,5 @@
-require 'rack'
-require 'simple_dash'
+require "rack"
+require "simple_dash"
 
 # Simulate some services we want to monitor
 class MockServices
@@ -46,7 +46,7 @@ SimpleDash.configure do |config|
     condition "database.connected", -> {
       MockServices.database_connection
     }
-    
+
     condition "database.responsive", -> {
       MockServices.database_latency < 100  # Less than 100ms
     }
@@ -70,7 +70,7 @@ SimpleDash.configure do |config|
 
     condition "disk.space", -> {
       begin
-        total_size = Dir.glob(File.join('/', '**', '*'))
+        total_size = Dir.glob(File.join("/", "**", "*"))
           .select { |f| File.file?(f) }
           .map { |f| File.size(f) }
           .sum
@@ -141,17 +141,17 @@ SimpleDash.configure do |config|
 end
 
 RackExample = Rack::Builder.new do
-  map '/health/system' do
+  map "/health/system" do
     run SimpleDash[:system]
   end
 
-  map '/health/app' do
+  map "/health/app" do
     run SimpleDash[:application]
   end
 
-  map '/' do
-    run ->(env) { 
-      [200, {'content-type' => 'text/html'}, ['Hello from Rack!']]
+  map "/" do
+    run ->(env) {
+      [200, {"content-type" => "text/html"}, ["Hello from Rack!"]]
     }
   end
 end

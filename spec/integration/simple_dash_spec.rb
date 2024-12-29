@@ -40,7 +40,7 @@ RSpec.describe SimpleDash do
 
   describe "GET /" do
     let(:path) { "system" }
-    
+
     it "returns a 200 status code" do
       status, headers, _body = app.call(env)
       expect(status).to eq(200)
