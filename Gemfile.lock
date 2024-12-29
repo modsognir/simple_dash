@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/modsognir/condition_checker.git
-  revision: 302c55e6e237ce3a93f0da50ebc8b215aa8bdfe5
+  revision: 0af6770525c0cba8a778af572a0aa27d808fef58
   specs:
     condition_checker (0.0.1)
 
