@@ -1,4 +1,4 @@
-# SimpleDash
+# SimpleDash !! WIP !!
 
 SimpleDash is simple, configurable health check dashboard Rack app for Ruby apps. It provides a web interface for monitoring system health checks and dependencies.
 
