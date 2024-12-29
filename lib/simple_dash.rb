@@ -14,6 +14,10 @@ module SimpleDash
       yield(configuration)
     end
 
+    def reset_config!
+      @configuration = nil
+    end
+
     def [](name)
       SimpleDash::App[name]
     end

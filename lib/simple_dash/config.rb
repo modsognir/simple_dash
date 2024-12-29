@@ -1,8 +1,15 @@
+# frozen_string_literal: true
+
 require "simple_dash/dashboard"
+require "simple_dash/i18n"
 
 module SimpleDash
   class Config
-    attr_accessor :i18n
+    attr_writer :i18n
+
+    def i18n
+      @i18n ||= SimpleDash::I18n
+    end
 
     def dashboards
       @dashboards ||= {}
