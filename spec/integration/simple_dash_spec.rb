@@ -33,16 +33,18 @@ RSpec.describe SimpleDash do
       end
     end
 
-    SimpleDash["system"]
+    SimpleDash[path]
   end
 
-  let(:env) { Rack::MockRequest.env_for("/") }
+  let(:env) { Rack::MockRequest.env_for("/#{path}") }
 
   describe "GET /" do
+    let(:path) { "system" }
+    
     it "returns a 200 status code" do
       status, headers, _body = app.call(env)
       expect(status).to eq(200)
-      expect(headers["Content-Type"]).to eq("text/html")
+      expect(headers["content-type"]).to eq("text/html")
     end
 
     context "with I18n" do
@@ -87,13 +89,13 @@ RSpec.describe SimpleDash do
   end
 
   describe "GET /invalid-path" do
-    let(:env) { Rack::MockRequest.env_for("/invalid-path") }
+    let(:path) { "invalid-path" }
 
     it "returns a 404 status code" do
       status, headers, body = app.call(env)
 
       expect(status).to eq(404)
-      expect(headers["Content-Type"]).to eq("text/html")
+      expect(headers["content-type"]).to eq("text/html")
       expect(body).to eq(["Not Found"])
     end
   end

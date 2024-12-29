@@ -17,9 +17,13 @@ module SimpleDash
 
     def call(env)
       req = Rack::Request.new(env)
-      config = SimpleDash.configuration
-      body = ERB.new(File.read("app/views/simple_dash/index.html.erb")).result(binding)
-      [200, {"content-type" => "text/html"}, [body]]
+      if dashboard
+        config = SimpleDash.configuration
+        body = ERB.new(File.read("app/views/simple_dash/index.html.erb")).result(binding)
+        [200, {"content-type" => "text/html"}, [body]]
+      else
+        [404, {"content-type" => "text/html"}, ["Not Found"]]
+      end
     end
   end
 end
