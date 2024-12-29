@@ -3,7 +3,7 @@ require "condition_checker"
 module SimpleDash
   class Dashboard
     class << self
-      attr_accessor :name
+      attr_writer :name
 
       def name
         @name || "simple_dash.dashboard"

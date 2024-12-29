@@ -21,7 +21,7 @@ module SimpleDash
     def [](name)
       SimpleDash::App[name]
     end
-  
+
     def call(env)
       App.call(env)
     end

@@ -1,4 +1,4 @@
-module SimpleDash 
+module SimpleDash
   class I18n
     def self.t(key)
       key.to_s

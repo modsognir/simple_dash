@@ -1,11 +1,11 @@
 module SimpleDash
   class App
     attr_accessor :name, :dashboard
-    
+
     def initialize(dashboard:)
       @dashboard = dashboard || SimpleDash.configuration.dashboards[nil]
     end
-    
+
     def self.call(env)
       raise "Use SimpleDash::App['dashboard_name'] instead"
     end
