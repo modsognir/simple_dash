@@ -77,7 +77,10 @@
           <span class="status-<%= check.success? ? "success" : "fail" %>"><%= check.success? ? "✅" : "❌" %></span> <%= config.i18n.t(check.name) %>
           <ul>
             <% check.conditions.each do |condition| %>
-              <li><span class="status-<%= condition.success? ? "success" : "fail" %>"><%= condition.success? ? "✅" : "❌" %></span> <%= config.i18n.t(condition.name) %></li>
+              <li>
+                <span class="status-<%= condition.success? ? "success" : "fail" %>"><%= condition.success? ? "✅" : "❌" %></span><%= config.i18n.t(condition.name) %>
+                <%= condition.result.error ? "(Error: #{condition.result.error.message})" : "" %>
+              </li>
             <% end %>
           </ul>
         </li>
